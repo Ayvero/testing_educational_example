@@ -1,0 +1,29 @@
+@Test
+	@DisplayName("Verificando varias características a la vez")
+	public void testVariasCaracteristicas() {
+		Persona p = new Persona("Mickey","2.234.528","1983-04-01",38,true);
+		Assertions.assertAll("Probando que se cumplen varias características",
+				()-> Assert.assertEquals("No se almacena el dni",p.getDNI(), "2.234.528"),
+				()-> Assert.assertEquals("Error al almacenar la edad",p.getEdad(),38)
+				);
+			
+		}
+
+//Persona test.java ....
+ @TestFactory
+ Stream<DynamicTest> dynamicTestsFromUsuarios() {
+    List<Persona>  testList = new  ArrayList<Persona>();
+    	Persona p1 = new Persona("Juan","26.150.235","1979-01-01",44,true);
+	Persona p2 = new Persona("Pedro","27.280.234","1980-02-01",43,true);
+	Persona p3 = new Persona("Maria","28.184.259","1981-03-01",42,true);
+	testList.add(p1);
+	testList.add(p2);
+	testList.add(p3);
+        return testList.stream()
+	            .map(dom -> DynamicTest.dynamicTest("Testing: " + dom, () -> {
+	                
+	                Assert.assertEquals(dom.getEdad(),getEdad(dom.getFechaNacimiento()));
+	            }));
+
+	    }    
+	     

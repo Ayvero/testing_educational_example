@@ -1,0 +1,8 @@
+@Test
+@DisplayName("Intenta votar una persona que no existe")
+public void testExpectedPersonaNoEncontradaException() {
+	Assertions.assertThrows(PersonaNoEncontradaException.class ,()->{
+	Persona p = new Persona("Mickey","2.234.528","1983-04-01",38,true);
+	padron.setVoto(p.getDNI());
+	});
+}
